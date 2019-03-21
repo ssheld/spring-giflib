@@ -34,14 +34,40 @@ public class GifRepository {
         return null;
     }
 
+    // Method to return all gifs
     public List<Gif> getAllGifs() {
         return ALL_GIFS;
     }
 
+    // Method that returns all gifs associated with a particular ID
     public List<Gif> findByCategoryId(int id) {
         List<Gif> gifs = new ArrayList<>();
         for (Gif gif : ALL_GIFS) {
             if (gif.getCategoryId() == id)
+                gifs.add(gif);
+        }
+        return gifs;
+    }
+
+    // Method to get all gifs that are a favorite
+    public List<Gif> findAllFavorites() {
+        List<Gif> gifs = new ArrayList<>();
+        for (Gif gif : ALL_GIFS) {
+            if (gif.isFavorite())
+                gifs.add(gif);
+        }
+        return gifs;
+    }
+
+    // Return all gifs that match a specific name
+    public List<Gif> findAllByName(String name) {
+        List<Gif> gifs = new ArrayList<>();
+
+        for (Gif gif : ALL_GIFS) {
+            // Make sure we ignore cases in comparison. Just in case
+            // the user doesn't know the full name let's check for substrings
+            // and make sure we trim any trailering spaces
+            if (gif.getName().toLowerCase().contains(name.trim().toLowerCase()))
                 gifs.add(gif);
         }
         return gifs;

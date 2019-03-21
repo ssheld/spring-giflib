@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" th:href="@{/app.css}" />
 
-    <title>giflib | Categories</title>
+    <title>giflib | Favorites</title>
 </head>
 <body>
 <div class="navbar-fixed">
@@ -20,13 +20,13 @@
             <a href="#" data-activates="mobile-nav" class="button-collapse right"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a th:href="@{/}">Explore</a></li>
-                <li class="active"><a th:href="@{/categories}">Categories</a></li>
-                <li><a th:href="@{/favorites}">Favorites</a></li>
+                <li><a th:href="@{/categories}">Categories</a></li>
+                <li class="active"><a th:href="@{/favorites}">Favorites</a></li>
             </ul>
             <ul id="mobile-nav" class="side-nav">
                 <li><a th:href="@{/}">Explore</a></li>
-                <li class="active"><a th:href="@{/categories}">Categories</a></li>
-                <li><a th:href="@{/favorites}">Favorites</a></li>
+                <li><a th:href="@{/categories}">Categories</a></li>
+                <li class="active"><a th:href="@{/favorites}">Favorites</a></li>
             </ul>
         </div>
     </nav>
@@ -43,30 +43,13 @@
         </div>
     </div>
 </div>
-<div class="categories container">
+<div class="gifs container">
     <div class="row">
-        <!--
-            Repeat the div element for each object in the 'categories'
-            collection of the model map. Each object in the loop
-            should be named 'category'
-        -->
-        <div th:each="category : ${categories}" class="col s12 l4">
-            <div class="card">
-                <div class="card-content">
-                    <div class="card-title">
-                        <!--
-                            Set the href attribute of the a tag to be the URI to
-                            a specific category according to the category's id.
-                            For example, /category/1 or /category/2
-
-                            Then, set the text between the a tags to be the category name,
-                            coming from the 'name' field of the 'category' object
-                            in the model map
-                        -->
-                        <a th:href="@{'/category/' + ${category.id}}" th:text="${category.name}">Category Name</a>
-                    </div>
-                </div>
-            </div>
+        <div th:each="gif : ${gifs}" class="col s12 l4">
+            <a th:href="@{|/gif/${gif.name}|}">
+                <img th:src="@{|/gifs/${gif.name}.gif|}" />
+                <a href="#" th:class="(${gif.favorite}? 'un' : '') + 'mark favorite'"></a>
+            </a>
         </div>
     </div>
 </div>
